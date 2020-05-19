@@ -1,0 +1,6 @@
+# Inclusion of specific files
+include LICENSE
+include README.rst
+
+# Inclusion of entire directories
+graft unified_plotting

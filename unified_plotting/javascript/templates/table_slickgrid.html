@@ -1,0 +1,1001 @@
+§PREFIX§
+  <style>
+    /* Main divisions */
+    #up-§RANDOM_ID§-main-div {
+      line-height: normal;
+      box-sizing: content-box;
+      padding: 3px;
+      background-color: white;
+    }
+    #up-§RANDOM_ID§-left-div {
+      float: left;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    #up-§RANDOM_ID§-right-div {
+      float: left;
+      height: 100%;
+      display: none;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    #up-§RANDOM_ID§-right-inner-div {
+      padding-left: 5px;
+      padding-right: 2px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: 100%;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+
+    /* Table summary text (contained in left-inner-div) */
+    #up-§RANDOM_ID§-table-summary-div {
+      font-size: 11px;
+      font-family: "Lucida Console", Monaco, monospace;
+      margin: 1px;
+      margin-top: 3px;
+      color: gray;
+    }
+
+    /* Slickgrid (contained in left-inner-div) */
+    #up-§RANDOM_ID§-grid-outer-div {
+      position: relative;
+    }
+    #up-§RANDOM_ID§-grid-div {
+      position: relative;
+      font-size: 10px;
+      font-family: "Lucida Console", Monaco, monospace;
+      font-weight: normal;
+      resize: vertical;
+      width: 100%;
+      height: 200px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    #up-§RANDOM_ID§-menu-toggle-button {
+      font-size: 14px;
+      font-family: "Lucida Console", Monaco, monospace;
+      z-index: 42000;
+      cursor: pointer;
+      background-color: white;
+      border-radius: 4px;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+      line-height: normal;
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      padding-left: 6px;
+      padding-right: 6px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      border-top: 0px;
+      border-right: 0px;
+      border-bottom: 1px solid #ccc;
+      border-left: 1px solid #ccc;
+    }
+    .up-§RANDOM_ID§-col-checkboxes {
+      background-color: #eee;
+    }
+    .ui-state-default {
+      border-bottom: 1px solid #ccc;
+      background: #eee;
+    }
+    .slick-cell {
+      position: absolute;
+      border: 1px solid transparent;
+      border-right: 1px dotted silver;
+      border-bottom-color: silver;
+      overflow: hidden;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      display: flex;
+      align-items : center;
+      justify-content: left;
+      z-index: 1;
+      padding: 0px 0px 0px 4px;
+      margin: 0;
+      white-space: nowrap;
+      cursor: default;
+      border-bottom-color: silver;
+    }
+    .slick-cell.selected {
+      background-color: #00864b20;
+    }
+    .slick-cell:focus {
+      outline: none;
+    }
+    .slick-header-column-sorted {
+      color: #00864b;
+    }
+    .slick-sort-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 4px;
+      margin-left: 4px;
+      margin-top: 6px;
+      float: left;
+    }
+    .slick-sort-indicator-numbered {
+      display: inline-block;
+      width: 8px;
+      height: 5px;
+      margin-left: 4px;
+      margin-top: 0;
+      line-height: 20px;
+      float: left;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: bold;
+      color: #00864b;
+    }
+    .slick-sort-indicator-desc {
+      background: url(data:image/gif;base64,R0lGODlhDQAFAMIHAACGSwGGSwGGTAOGTQGHTAOHTePu+0aUACH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAAcALAAAAAANAAUAAAMVaACyA+ZIaUoDJc5pCAnaxkFiGYoJADs=);
+    }
+    .slick-sort-indicator-asc {
+      background: url(data:image/gif;base64,R0lGODlhDQAFAMIEAACGSwGGSwGHSuPu+0aUAEaUAEaUAEaUACH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAAQALAAAAAANAAUAAAMRSEqw7gG0t6SlRNjrhv+fkwAAOw==);
+    }
+    .slick-resizable-handle {
+      position: absolute;
+      font-size: 0.1px;
+      display: block;
+      cursor: col-resize;
+      width: 9px;
+      right: -5px;
+      top: 0;
+      height: 100%;
+      z-index: 1;
+    }
+    .slick-header.ui-state-default {
+      overflow: inherit;
+    }
+    .slick-header::-webkit-scrollbar,  .slick-headerrow::-webkit-scrollbar, .slick-footerrow::-webkit-scrollbar {
+      display: none
+    }
+    .slick-header-columns, .slick-headerrow-columns, .slick-footerrow-columns, .slick-group-header-columns {
+      position: relative;
+      white-space: nowrap;
+      cursor: default;
+      overflow: hidden;
+    }
+    .slick-header-column.ui-state-default, .slick-group-header-column.ui-state-default {
+      position: relative;
+      display: inline-block;
+      box-sizing: content-box !important; /* this here only for Firefox! */
+      overflow: hidden;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      height: 16px;
+      line-height: 16px;
+      margin: 0;
+      padding: 4px;
+      border-right: 1px solid silver;
+      border-left: 0px !important;
+      border-top: 0px !important;
+      border-bottom: 0px !important;
+      float: left;
+    }
+    .grid-canvas {
+      position: relative;
+      outline: 0;
+    }
+    .slick-row.ui-widget-content, .slick-row.ui-state-active {
+      position: absolute;
+      border: 0px;
+      width: 100%;
+    }
+    .slick-header {
+      overflow: hidden;
+      position: relative;
+    }
+    .slick-headerrow {
+      overflow: hidden;
+      position: relative;
+    }
+    .slick-viewport {
+      position: relative;
+      outline: 0;
+      width: 100%;
+    }
+    .slick-pane {
+      position: absolute;
+      outline: 0;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    /* Control menu (contained in right-inner-div) */
+    .up-§RANDOM_ID§-menu-item-head {
+      font-size: 11px;
+      font-family: "Lucida Console", Monaco, monospace;
+      color: black;
+      cursor: pointer;
+      padding-left: 5px;
+      padding-right: 0px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    .up-§RANDOM_ID§-menu-item-body {
+      margin-left: 5px;
+      margin-bottom: 10px;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    .up-§RANDOM_ID§-menu-subitem-head {
+      font-size: 9px;
+      font-family: "Lucida Console", Monaco, monospace;
+      font-weight: 600;
+      color: #006429;
+      cursor: default;
+      margin-bottom: 2px;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    .up-§RANDOM_ID§-menu-subitem-body {
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      margin-left: 7px;
+      margin-bottom: 5px;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    .up-§RANDOM_ID§-labeled-input {
+      all: initial;
+      display: flex;
+      align-items: center;
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+    .up-§RANDOM_ID§-label {
+      all: initial;
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      font-style: italic;
+      cursor: pointer;
+    }
+    .up-§RANDOM_ID§-slider {
+      width: 100%;
+      margin-bottom: 2px;
+    }
+    .up-§RANDOM_ID§-slider::-moz-focus-outer {
+      border: 0;
+    }
+    .up-§RANDOM_ID§-slider-text-left {
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      font-style: italic;
+      color: black;
+      float: left;
+      margin-top: 2px;
+    }
+    .up-§RANDOM_ID§-slider-text-right {
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      color: black;
+      float: right;
+    }
+    .up-§RANDOM_ID§-checkbox {
+      margin-left: 0px !important;
+      margin-right: 4px !important;
+      margin-top: 2px !important;
+      margin-bottom: 2px !important;
+      padding: 0px !important;
+    }
+    .up-§RANDOM_ID§-select {
+      cursor: pointer;
+      outline: none;
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      color: black;
+      background-color: #f5f5f5;
+      width: 100%;
+      padding-top: 4px !important;
+      padding-bottom: 4px !important;
+      padding-left: 5px;
+      padding-right: 10px;
+      margin-right: 5px;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      border-radius: 4px;
+      border: 1.2px solid #bbb;
+      box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOTIuNCIgaGVpZ2h0PSIyOTIuNCI+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTSAtNS4yMDY0NjJlLTYsNjQuNTcyNjU2IDI5Mi4zOTk5OSw2NC41NzI2NTQgMTQ2LjE5OTk3LDIzMy42Mjg0NyAtNS4yMDY0NjJlLTYsNjQuNTcyNjU2Ii8+PC9zdmc+Cg==');
+      background-repeat: no-repeat;
+      background-position: right 4px top 50%;
+      background-size: 6px;
+    }
+    @-moz-document url-prefix() {
+      /* Dirty hack to remove dotted border on focus */
+      .up-§RANDOM_ID§-select {
+        color: transparent !important;
+        text-shadow: 0 0 0 black !important;
+      }
+    }
+    .up-§RANDOM_ID§-select:after {
+      cursor: pointer;
+    }
+    .up-§RANDOM_ID§-button {
+      cursor: pointer;
+      outline: none;
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      color: black;
+      background-color: #f2f2f2;
+      padding-top: 4px !important;
+      padding-bottom: 4px !important;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      border-radius: 4px;
+      border: 1.2px solid #bbb;
+      box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+    }
+    .up-§RANDOM_ID§-button:hover {
+      border: 1.2px solid #999;
+      background-color: #f2f2f2;
+    }
+    .up-§RANDOM_ID§-button:active {
+      background-color: #ddd;
+    }
+    .up-§RANDOM_ID§-button::-moz-focus-inner {
+      border: 0;
+    }
+  </style>
+
+  <div id="up-§RANDOM_ID§-main-div">
+    <div id="up-§RANDOM_ID§-left-div">
+      <div id="up-§RANDOM_ID§-left-inner-div">
+        <div id="up-§RANDOM_ID§-grid-outer-div"><div id="up-§RANDOM_ID§-grid-div"></div></div>
+        <div id="up-§RANDOM_ID§-table-summary-div"></div>
+      </div>
+    </div>
+
+    <div id="up-§RANDOM_ID§-right-div">
+      <div id="up-§RANDOM_ID§-right-inner-div">
+        <!-- Menu: General -->
+        <div class="up-§RANDOM_ID§-menu-item-head"
+             id="up-§RANDOM_ID§-general-head">
+          General
+        </div>
+        <div class="up-§RANDOM_ID§-menu-item-body"
+             id="up-§RANDOM_ID§-general-body">
+          <!-- Sub-menu: State -->
+          <div>
+            <div class="up-§RANDOM_ID§-menu-subitem-head">
+              App state
+            </div>
+            <div class="up-§RANDOM_ID§-menu-subitem-body">
+              <button class="up-§RANDOM_ID§-button"
+                      id="up-§RANDOM_ID§-reset"
+                      type="button">Reset</button>
+            </div>
+          </div>
+          <!-- Sub-menu: Display mode (fullscreen or not) -->
+          <div>
+            <div class="up-§RANDOM_ID§-menu-subitem-head">
+              Display mode
+            </div>
+            <div class="up-§RANDOM_ID§-menu-subitem-body">
+              <button class="up-§RANDOM_ID§-button"
+                      id="up-§RANDOM_ID§-fullscreen-button"
+                      type="button">Enter full screen</button>
+            </div>
+          </div>
+          <!-- Sub-menu: Export -->
+          <div>
+            <div class="up-§RANDOM_ID§-menu-subitem-head">
+              Export
+            </div>
+            <div class="up-§RANDOM_ID§-menu-subitem-body">
+              <button class="up-§RANDOM_ID§-button"
+                      id="up-§RANDOM_ID§-csv"
+                      type="button">CSV</button>
+            </div>
+          </div>
+        </div>
+        <!-- Menu: Table -->
+        <div class="up-§RANDOM_ID§-menu-item-head"
+             id="up-§RANDOM_ID§-table-head">
+          Table
+        </div>
+        <div class="up-§RANDOM_ID§-menu-item-body"
+             id="up-§RANDOM_ID§-table-body">
+          <!-- Sub-menu: Dimensions -->
+          <div>
+            <div class="up-§RANDOM_ID§-menu-subitem-head">
+              Plot size
+            </div>
+            <div class="up-§RANDOM_ID§-menu-subitem-body">
+              <div>
+                <span class="up-§RANDOM_ID§-slider-text-left">Cell width</span>
+                <span class="up-§RANDOM_ID§-slider-text-right"
+                      id="up-§RANDOM_ID§-cell-width-text"></span>
+                <input class="up-§RANDOM_ID§-slider"
+                       id="up-§RANDOM_ID§-cell-width-slider"
+                       type="range" min="1" max="300" step="0.001">
+              </div>
+              <div>
+                <span class="up-§RANDOM_ID§-slider-text-left">Cell height</span>
+                <span class="up-§RANDOM_ID§-slider-text-right"
+                      id="up-§RANDOM_ID§-cell-height-text"></span>
+                <input class="up-§RANDOM_ID§-slider"
+                       id="up-§RANDOM_ID§-cell-height-slider"
+                       type="range" min="1" max="300" step="0.001">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script charset="utf-8" type="text/javascript">
+    if(typeof(require) === "undefined"){
+      §LOAD_REQUIRE§
+    }
+
+    §DEFINE_JQUERY§
+    §DEFINE_SLICKGRID§
+
+    require(["up-slickgrid"],
+            function(Slick){
+      const state = {
+        manager:{
+          fetchRawDataFromTemplating(){
+            state.rows = §DATA§;
+            state.columnNames = §COLUMN_NAME§;
+            state.gridColumnsHtml = §COLUMN_HTML§;
+            state.gridContainerHeight = §TABLE_HEIGHT§;
+            state.showMenu = §SHOW_MENU§;
+            state.showMenuToggleButton = §SHOW_MENU_TOGGLE_BUTTON§;
+            state.gridCellWidth = §TABLE_CELL_WIDTH§;
+            state.gridCellHeight = §TABLE_CELL_HEIGHT§;
+            state.selectedRows = new Set([]);
+            state.numDisplayedRows = 0;
+          },
+        },
+      }
+
+      const ui = {
+        symbols:{
+          // Choice of symbols is influenced by their appearance in different browsers
+          // Alternatives: "▼", "▽", "▾" / "▲", "△", "▴" / "▶", "▷", "▸" / "◀", "◁", "◂"
+          // ▶ is rendered strangely on some mobile phone browsers, ▸ remains normal
+          menuShown: "▸",
+          menuHidden: "◂",
+          menuItemActive: "▸",
+          menuItemInactive: "▾",
+        },
+
+        elements:{
+          // Containers
+          mainContainer: document.getElementById("up-§RANDOM_ID§-main-div"),
+          leftContainer: document.getElementById("up-§RANDOM_ID§-left-div"),
+          rightContainer: document.getElementById("up-§RANDOM_ID§-right-div"),
+          tableSummaryContainer: document.getElementById("up-§RANDOM_ID§-table-summary-div"),
+          gridOuterContainer: document.getElementById("up-§RANDOM_ID§-grid-outer-div"),
+          gridContainer: document.getElementById("up-§RANDOM_ID§-grid-div"),
+          // General
+          generalHead: document.getElementById("up-§RANDOM_ID§-general-head"),
+          generalBody: document.getElementById("up-§RANDOM_ID§-general-body"),
+          resetButton: document.getElementById("up-§RANDOM_ID§-reset"),
+          fullscreenButton: document.getElementById("up-§RANDOM_ID§-fullscreen-button"),
+          csvExportButton: document.getElementById("up-§RANDOM_ID§-csv"),
+          // Table
+          grid: undefined,
+          tableHead: document.getElementById("up-§RANDOM_ID§-table-head"),
+          tableBody: document.getElementById("up-§RANDOM_ID§-table-body"),
+          cellWidthText: document.getElementById("up-§RANDOM_ID§-cell-width-text"),
+          cellWidthSlider: document.getElementById("up-§RANDOM_ID§-cell-width-slider"),
+          cellHeightText: document.getElementById("up-§RANDOM_ID§-cell-height-text"),
+          cellHeightSlider: document.getElementById("up-§RANDOM_ID§-cell-height-slider"),
+          // Setter methods
+          setCellWidthText(value) {
+            ui.elements.cellWidthText.innerHTML = ui.convert.absoluteValueToText(value, numDigits=1) + "px"
+          },
+          setCellHeightText(value) {
+            ui.elements.cellHeightText.innerHTML = ui.convert.absoluteValueToText(value, numDigits=1) + "px"
+          },
+        },
+
+        composites:{
+          responsiveContainer:{
+            init(){
+              // Menu
+              if(state.showMenu){
+                ui.composites.menu.show();
+              } else{
+                ui.composites.menu.hide();
+              }
+              // Containers
+              ui.composites.responsiveContainer.setInnerHeights();
+              ui.composites.responsiveContainer.setOuterHeights();
+              ui.composites.responsiveContainer.getInnerWidths();
+            },
+
+            getInnerWidths(){
+              state.gridContainerWidth = parseInt(ui.elements.gridContainer.clientWidth);
+            },
+
+            getInnerHeights(){
+              state.gridContainerHeight = parseInt(ui.elements.gridContainer.clientHeight);
+            },
+
+            setInnerHeights(){
+              ui.elements.gridContainer.style.height = state.gridContainerHeight + "px";
+            },
+
+            setOuterHeights(){
+              ui.elements.mainContainer.style.height = ui.elements.leftContainer.offsetHeight + "px";
+            },
+
+            getSizes(){
+              ui.composites.responsiveContainer.getInnerWidths();
+              ui.composites.responsiveContainer.getInnerHeights();
+            },
+
+            setSizes(){
+              ui.composites.responsiveContainer.setInnerHeights();
+              ui.composites.responsiveContainer.setOuterHeights();
+            },
+
+            adaptToResize(){
+              ui.composites.responsiveContainer.getSizes();
+              ui.composites.responsiveContainer.setSizes();
+            },
+
+            adaptToFullscreen(){
+              ui.composites.responsiveContainer.getSizes();
+              if(document.fullscreenElement){
+                // On entering fullscreen, remember the current container heights
+                state.beforeFullscreenGridContainerHeight = state.gridContainerHeight;
+                // and then adapt them to maximum height possible in full screen mode
+                function calculateFullscreenMaxHeight(){
+                  let outerHeight = null;
+                  try{
+                    const mainDivComputedStyle = window.getComputedStyle(ui.elements.mainContainer),
+                      rowNumberDivComputedStyle = window.getComputedStyle(ui.elements.tableSummaryContainer),
+                      gridDivComputedStyle = window.getComputedStyle(ui.elements.gridContainer),
+                      paddingTop = parseFloat(mainDivComputedStyle.paddingTop),
+                      marginMiddleTop = parseFloat(rowNumberDivComputedStyle.marginTop),
+                      heightMiddle = parseFloat(rowNumberDivComputedStyle.height),
+                      marginMiddleBottom = parseFloat(rowNumberDivComputedStyle.marginBottom),
+                      borderTop = parseFloat(gridDivComputedStyle.borderTopWidth),
+                      borderBottom = parseFloat(gridDivComputedStyle.borderBottomWidth),
+                      paddingBottom = parseFloat(mainDivComputedStyle.paddingBottom);
+                    outerHeight = paddingTop + borderTop + marginMiddleTop + heightMiddle + marginMiddleBottom + borderBottom + paddingBottom;
+                    if(!isFinite(outerHeight) || outerHeight === null){
+                      throw "Invalid number";
+                    }
+                  } catch(e){
+                    // Hard coded fallback, depends on CSS of containers (1px borders, 6px padding)
+                    outerHeight = 1 + 3 + 3 + 13.5 + 1 + 3 + 1;
+                  }
+                  let gridHeight = screen.height - outerHeight;
+                  return gridHeight;
+                }
+                const maxHeight = calculateFullscreenMaxHeight();
+                state.gridContainerHeight = maxHeight;
+              } else{
+                // On leaving fullscreen, set container heights back to remembered values
+                state.gridContainerHeight = state.beforeFullscreenGridContainerHeight;
+              }
+              ui.composites.responsiveContainer.setSizes();
+            },
+          },
+
+          tableSummary:{
+            update(){
+              const text = state.numDisplayedRows + " rows, " +
+                (state.columnNames.length + 1) + " columns";
+              ui.elements.tableSummaryContainer.innerHTML = text;
+            },
+          },
+
+          menu:{
+            show(){
+              ui.elements.leftContainer.style.width = "80%";
+              ui.elements.rightContainer.style.width = "20%";
+              ui.elements.rightContainer.style.display = "block";
+            },
+
+            hide(){
+              ui.elements.leftContainer.style.width = "100%";
+              ui.elements.rightContainer.style.width = "0%";
+              ui.elements.rightContainer.style.display = "none";
+            },
+
+            toggle(){
+              // Update menu button
+              const div = ui.elements.menuToggleDiv;
+              state.showMenu = !state.showMenu;
+              if(state.showMenu){
+                div.innerText = ui.symbols.menuShown;
+                ui.composites.menu.show();
+              } else {
+                div.innerHTML = ui.symbols.menuHidden;
+                ui.composites.menu.hide();
+              }
+
+              // Update rest of UI
+              ui.composites.responsiveContainer.getInnerWidths();
+              ui.composites.responsiveContainer.getInnerHeights();
+              ui.composites.responsiveContainer.setOuterHeights();
+              ui.composites.grid.updateWidth();
+            },
+
+            setItem(keyElement, valElement, toActive){
+              const currentText = keyElement.innerHTML;
+              let sliceStart = 0;
+              if(currentText.startsWith(ui.symbols.menuItemActive)){
+                sliceStart = ui.symbols.menuItemActive.length;
+              } else if (currentText.startsWith(ui.symbols.menuItemInactive)){
+                sliceStart = ui.symbols.menuItemInactive.length;
+              }
+              if(toActive){
+                keyElement.innerHTML = ui.symbols.menuItemActive + currentText.slice(sliceStart);
+                keyElement.style.backgroundColor = "#f5f5f5";
+                keyElement.style.color = "black";
+                keyElement.style.borderColor = "#999";
+                keyElement.style.boxShadow = "0px 0px 3px rgba(0, 0, 0, 0.35)";
+                valElement.style.display = "block";
+              } else {
+                keyElement.innerHTML = ui.symbols.menuItemInactive + currentText.slice(sliceStart);
+                keyElement.style.backgroundColor = "white";
+                keyElement.style.color = "#222";
+                keyElement.style.borderColor = "#ccc";
+                keyElement.style.boxShadow = "0px 0px 3px rgba(0, 0, 0, 0.2)";
+                valElement.style.display = "none";
+              }
+            },
+
+            toggleItem(keyElement, valElement){
+              const toActive = !(valElement.style.display !== "none");
+              ui.composites.menu.setItem(keyElement, valElement, toActive);
+            },
+          },
+
+          selection(element, optionList, valueList=undefined) {
+            while(element.hasChildNodes()){
+              element.removeChild(element.firstChild);
+            }
+            for(let i=0; i<optionList.length; i++){
+              let text = optionList[i];
+              let value = text;
+              if(valueList){
+                value = valueList[i];
+              }
+              let opt = document.createElement("option");
+              opt.appendChild(document.createTextNode(text));
+              opt.value = value;
+              element.appendChild(opt);
+            }
+          },
+
+          download:{
+            csv(filename){
+              ui.composites.download._table(filename);
+            },
+
+            _table(filename){
+              const arr = ui.composites.grid.dataView.getItems();
+              let csvString = "";
+              csvString += JSON.stringify("Checked") + ",";
+              for (let i=1; i<ui.composites.grid.columns.length; i++) {
+                colHeader = ui.composites.grid.columns[i].name;
+                csvString += JSON.stringify(colHeader) + ",";
+              }
+              csvString += "\n";
+              for (let i=0; i<arr.length; i++) {
+                row = arr[i];
+                for (let j=0; j<ui.composites.grid.columns.length; j++) {
+                  colName = ui.composites.grid.columns[j].field;
+                  csvString += JSON.stringify(row[colName]) + ",";
+                }
+                csvString += "\n";
+              }
+              // Blob to overcome size limitations for data URLs (e.g. 4MB in Chrome)
+              // (and URL encoding of newlines)
+              const blob = new Blob([csvString], {type: "text/plain"});
+              ui.composites.download._blobToFileDownload(blob, filename);
+            },
+
+            _blobToFileDownload(blob, filename){
+              const url = URL.createObjectURL(blob),
+                a = document.createElement("a");
+              function handleClick(){
+                setTimeout(function(){
+                  // Long waiting time before removal for slow devices like mobile phones
+                  URL.revokeObjectURL(url);
+                  this.removeEventListener("click", handleClick);
+                }, 20000);
+              };
+              document.body.appendChild(a);
+              a.href = url;
+              a.download = filename;
+              a.addEventListener("click", handleClick, false);
+              a.click();
+              document.body.removeChild(a);
+            },
+          },
+
+          grid:{
+            // SlickGrid, https://github.com/6pac/SlickGrid/wiki
+            dataView: new Slick.Data.DataView(),
+            options:{
+              enableAsyncPostRender: true,
+              enableCellNavigation: false,
+              enableColumnReorder: false,
+              enableTextSelectionOnCells: false,
+              multiColumnSort: true,
+              numberedMultiColumnSort: true,
+              sortColNumberInSeparateSpan: false,
+              tristateMultiColumnSort: true,
+            },
+
+            create() {
+              // Remove existing elements
+              ui.deleteChildElements(ui.elements.gridContainer);
+              // Create new elements
+              // - Columns
+              ui.composites.grid.columns = this._createColumns()
+              // - Grid
+              for(let i=2; i<this.columns.length; i++){
+                this.columns[i].width = state.gridCellWidth;
+              }
+              this.options.rowHeight = state.gridCellHeight;
+              let newGrid = new Slick.Grid("#up-§RANDOM_ID§-grid-div", this.dataView,
+                                           this.columns, this.options);
+              // Row change behavior: Link DataView updates to grid
+              this.dataView.onRowCountChanged.subscribe(function (event, args) {
+                newGrid.updateRowCount();
+                newGrid.render();
+              });
+              this.dataView.onRowsChanged.subscribe(function (event, args) {
+                newGrid.invalidateRows(args.rows);
+                newGrid.render();
+              });
+              // Fill the DataView and thereby the grid with data
+              this.updateData(state.rows);
+              // Select behavior
+              newGrid.setSelectionModel(new Slick.CellSelectionModel());
+              // Copy behavior
+              newGrid.registerPlugin(new Slick.CellExternalCopyManager());
+              // Sort behavior
+              newGrid.onSort.subscribe(function(event, args){
+                const cols = args.sortCols,
+                  data = state.rows;
+                data.sort(function (dataRow1, dataRow2){
+                  for(let i=0; i<cols.length; i++) {
+                    const field = cols[i].sortCol.field,
+                      sign = cols[i].sortAsc ? 1 : -1,
+                      value1 = dataRow1[field],
+                      value2 = dataRow2[field]
+                      result = (value1 == value2 ? 0 : (value1 > value2 ? 1 : -1)) * sign;
+                    if(result != 0) {
+                      return result;
+                    }
+                  }
+                  return 0;
+                });
+                ui.composites.grid.updateData(data);
+              });
+              // Store correct height after creation in order to prevent an unnecessary redraw
+              state.gridContainerHeight = ui.elements.gridContainer.offsetHeight;
+              // - Menu toggle button
+              if(state.showMenuToggleButton && !document.getElementById("up-§RANDOM_ID§-menu-toggle-button")){
+                const menuDiv = document.createElement("div");
+                if(state.showMenu){
+                menuDiv.innerText = ui.symbols.menuShown;
+                } else {
+                menuDiv.innerText = ui.symbols.menuHidden;
+                }
+                menuDiv.id = "up-§RANDOM_ID§-menu-toggle-button";
+                menuDiv.onclick = ui.composites.menu.toggle;
+                // Append it to an outer div so it is unaffected by horizontal scrolling in inner
+                ui.elements.gridOuterContainer.appendChild(menuDiv);
+                ui.elements.menuToggleDiv = menuDiv;
+              }
+              return newGrid;
+            },
+            updateData(data){
+              if(!data){
+                data = state.rows;
+              }
+              this.dataView.beginUpdate();
+              this.dataView.setItems(data);
+              this.dataView.endUpdate();
+              state.numDisplayedRows = data.length ? data.length : 0;
+              ui.composites.tableSummary.update();
+            },
+            updateWidth(){
+              let columns = ui.elements.grid.getColumns();
+              for(let i=2; i<columns.length; i++){
+                columns[i].width = state.gridCellWidth;
+              }
+              ui.elements.grid.setColumns(columns);
+            },
+            updateHeight(){
+              this.options.rowHeight = state.gridCellHeight;
+              ui.elements.grid.setOptions(this.options);
+            },
+            _renderHtmlInGridCell(cellNode, rowIdx, rowData, colDef){
+              cellNode[0].innerHTML = rowData[colDef.name];
+            },
+            _waitForRenderFormatter(row, cell, value, columnDef, dataContext){
+              return '...';
+            },
+            _createColumns(){
+              function checkboxFormatter(row, cell, value, columnDef, dataContext){
+                if(value==1) {
+                  return '<input type="checkbox" checked/>';
+                } else {
+                  return '<input type="checkbox"/>';
+                }
+              }
+
+              let colArr = [
+                {id: "id", field: "id", name: "id", sortable: true, width: 20},
+              ]
+
+              state.columnNames.forEach(function(col){
+                let colSpec = {id: col, field: col, name: col, sortable: true};
+                if(state.gridColumnsHtml.some(function(colHtml){return col==colHtml})){
+                  colSpec["formatter"] = ui.composites.grid._waitForRenderFormatter;
+                  colSpec["asyncPostRender"] = ui.composites.grid._renderHtmlInGridCell;
+                }
+                colArr.push(colSpec);
+              });
+              return colArr
+            },
+          },
+        },
+
+        init(){
+          function setSelectionOptionsAndValue(element, options, value){
+            if(!options.includes(value)){
+              value = options[0];
+            }
+            ui.composites.selection(element, options);
+            element.value = value;
+          }
+          // Containers
+          ui.composites.responsiveContainer.init();
+
+          // General
+          ui.composites.menu.setItem(ui.elements.generalHead, ui.elements.generalBody, true);
+          // Table
+          ui.composites.menu.setItem(ui.elements.tableHead, ui.elements.tableBody, false);
+          ui.composites.tableSummary.update();
+          ui.elements.setCellWidthText(state.gridCellWidth);
+          ui.elements.cellWidthSlider.value = state.gridCellWidth;
+          ui.elements.setCellHeightText(state.gridCellHeight);
+          ui.elements.cellHeightSlider.value = state.gridCellHeight;
+        },
+
+        deleteChildElements(element){
+          while(element.firstChild){
+            element.removeChild(element.firstChild);
+          }
+        },
+
+        convert:{
+          percentageValueToText(value) {
+            return Number(value * 100.0).toFixed(1).toString() + "%";
+          },
+
+          absoluteValueToText(value, numDigits=2) {
+            return Number(value).toFixed(numDigits).toString();
+          },
+        },
+
+        setBehavior(){
+          // Window resize (includes ctrl+wheel zoom, landscape/portrait orientation on phones)
+          let resizeTimer;
+          window.addEventListener("resize", function(event){
+            // Wait a bit till last user interaction has finished to prevent multiple redraws
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function(){
+              const widthChange = state.gridContainerWidth !== ui.elements.gridContainer.offsetWidth;
+              if(widthChange){
+                ui.composites.responsiveContainer.adaptToResize();
+                ui.composites.grid.updateWidth();
+              }
+            }, 300);
+          });
+
+          // General menu
+          ui.elements.generalHead.onclick = function(){
+            ui.composites.menu.toggleItem(ui.elements.generalHead, ui.elements.generalBody);
+          };
+          ui.elements.resetButton.onclick = function(){
+            app.restart();
+          };
+          ui.elements.fullscreenButton.onclick = function(){
+            // https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen
+            if(!document.fullscreenElement) {
+              ui.elements.mainContainer.requestFullscreen()
+                .catch(function(err){
+                  alert("Error attempting to enable full-screen mode: " + err.message);
+                });
+            } else {
+              document.exitFullscreen();
+            }
+          };
+          ui.elements.mainContainer.onfullscreenchange = function(){
+            if(document.fullscreenElement) {
+              ui.elements.fullscreenButton.innerText = "Exit full screen";
+            } else {
+              ui.elements.fullscreenButton.innerText = "Enter full screen";
+            }
+            // Wait for browser to switch to fullscreen and resize divs, then adapt to new sizes
+            setTimeout(function(){
+              ui.composites.responsiveContainer.adaptToFullscreen();
+            }, 125);
+          };
+          ui.elements.csvExportButton.onclick = function(){
+            ui.composites.download.csv("table.csv");
+          };
+
+          // Table
+          ui.elements.tableHead.onclick = function(){
+            ui.composites.menu.toggleItem(ui.elements.tableHead, ui.elements.tableBody);
+          };
+          ui.elements.gridContainer.onmouseup = function(){
+            if (ui.elements.gridContainer.offsetHeight != state.gridContainerHeight){
+              state.gridContainerHeight = ui.elements.gridContainer.offsetHeight;
+              ui.composites.responsiveContainer.adaptToResize();
+              ui.elements.grid = ui.composites.grid.create();
+              ui.composites.grid.updateData();
+            }
+          };
+          ui.elements.cellWidthSlider.oninput = function(){
+            ui.elements.setCellWidthText(this.value);
+          };
+          ui.elements.cellWidthSlider.onchange = function(){
+            state.gridCellWidth = parseFloat(this.value);
+            ui.composites.grid.updateWidth();
+          };
+          ui.elements.cellHeightSlider.oninput = function(){
+            ui.elements.setCellHeightText(this.value);
+          };
+          ui.elements.cellHeightSlider.onchange = function(){
+            state.gridCellHeight = parseFloat(this.value);
+            ui.composites.grid.updateHeight();
+          };
+        },
+      }
+
+      const app = {
+        start(){
+          state.manager.fetchRawDataFromTemplating();
+          ui.init();
+          ui.elements.grid = ui.composites.grid.create();
+          ui.setBehavior();
+        },
+
+        restart(){
+          // Reset row selections via checkboxes
+          state.selectedRows.forEach(function(rowId){
+            state.rows[rowId].checkbox = 0;
+          });
+          // Start again
+          app.start();
+        },
+      }
+
+      // Start website dynamics
+      app.start();
+    });
+  </script>
+§SUFFIX§
